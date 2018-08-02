@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>اضافة بيانات </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <img src="assets/imgs/logo.png" class="logo">
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">اضف رقم جواز سفرك</ion-label>
+      <ion-input [(ngModel)]="passport" type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button block full (click)="next()">
+      <span *ngIf="!waiting" class="enter">متابعة</span>
+      <ion-spinner name="ios-small" *ngIf="waiting" color="light"></ion-spinner>
+  </button>
+</ion-content>

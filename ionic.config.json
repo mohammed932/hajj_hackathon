@@ -1,0 +1,7 @@
+{
+  "name": "HajjBand",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

@@ -1,0 +1,22 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>الاعضاء</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="plus()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <loading-spinner *ngIf="loadingSpinner"></loading-spinner>
+  <ion-list *ngIf="!loadingSpinner">
+    <ion-item *ngFor="let member of Members">{{member.P_Name}}</ion-item>
+  </ion-list>
+
+  <button ion-button block full (click)="next()">متابعة</button>
+</ion-content>

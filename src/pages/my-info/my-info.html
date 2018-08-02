@@ -1,0 +1,29 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>بياناتي</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      الاسم : {{userInfo.P_Name}}
+    </ion-item>
+    <ion-item>
+      الدولة : {{userInfo.Country}}
+    </ion-item>
+    <ion-item>
+      العمر : {{userInfo.Age}}
+    </ion-item>
+    <ion-item>
+      النوع : {{ getGender(userInfo.Gender)}}
+    </ion-item>
+  </ion-list>
+
+  
+
+</ion-content>
+
