@@ -17,7 +17,7 @@ export class JoinMemberPage {
   }
 
   next() {
-    this.navCtrl.setRoot('MyGroupPage', { membersData: this.Members })
+    this.navCtrl.setRoot('MyGroupPage')
   }
 
   plus() {

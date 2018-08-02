@@ -1,10 +1,11 @@
+import { SettingProvider } from './../setting/setting';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ApiProvider {
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient , private settingService : SettingProvider) {
     console.log('Hello ApiProvider Provider');
   }
 
@@ -23,5 +24,10 @@ export class ApiProvider {
   myGroup(params): Observable<any> {
     let url = `https://prod-03.westeurope.logic.azure.com:443/workflows/8a558de11dfe4cd78c24309ff90290f1/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=SSku8FN_IzSBInsT_MJj0UIUP5pHWb0yAhLhPVjYs_o`
     return this.http.post(url, JSON.stringify(params));
+  }
+
+  updateMemberLocation(params): Observable<any> {
+    let url = `https://prod-47.westeurope.logic.azure.com:443/workflows/a158053b3bd6456dadbcab4cb68e9e3a/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=STsAfPZ2fxw6XYr_am6vydx0ASjKa7YRdoHs04yKjOU`
+    return this.http.post(url, JSON.stringify(params)); 
   }
 }
