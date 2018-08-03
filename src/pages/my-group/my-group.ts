@@ -2,6 +2,7 @@ import { ApiProvider } from './../../providers/api/api';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 
 declare var google;
 
@@ -29,14 +30,14 @@ export class MyGroupPage {
     this.membersInfo = this.navParams.get('membersData')
     console.log('membersInfo : ', this.membersInfo);
 
+    IntervalObservable.create(1000 * 20).subscribe(x => {
+      this.getGroupLocations();
+    })
   }
 
   ionViewWillEnter(){
     this.initMap();
   }
-
-
-
 
   setUpdateMapMemberLocation(lat, lng) {
     this.mapData.LatestLat = lat
@@ -50,17 +51,14 @@ export class MyGroupPage {
 
   }
 
-
   ionViewDidLoad() {
     this.initMap();
   }
-
 
   initMap() {
     if (this.membersInfo.length > 0) {
       this.presentMAp()
     }
-
   }
 
   presentMAp() {
@@ -92,7 +90,7 @@ export class MyGroupPage {
     var flightPath = new google.maps.Polygon({
       path: points,
       geodesic: true,
-      strokeOpacity: 1.0,
+      strokeOpacity: 2.0,
       strokeWeight: 2
     });
 
@@ -111,12 +109,11 @@ export class MyGroupPage {
   }
 
   getGroupLocations() {
+    console.log('Getting the new Locations Of my team');
     this.apiServ.myGroup({ GroupID: JSON.parse(localStorage.getItem('userInfo')).Group_ID }).subscribe(data => {
       console.log("my-group info: ", data);
       this.membersInfo = data
       this.initMap()
     })
   }
-
-
 }

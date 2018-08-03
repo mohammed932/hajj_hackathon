@@ -31,7 +31,6 @@ export class AddInfoPage {
         this.getCurrentMemberLocation()
         this.navCtrl.setRoot('TabsPage')
       })
-
     })
 
   }
@@ -40,18 +39,10 @@ export class AddInfoPage {
   getCurrentMemberLocation() {
     /* get current member location  */
     this.geolocation.getCurrentPosition().then((resp) => {
-      console.log('current memner location : ', resp)
+      console.log('i have Got my Location : ', resp)
       this.setUpdateMapMemberLocation(resp.coords.latitude, resp.coords.longitude)
     }).catch((error) => {
       console.log('Error getting location', error);
-    });
-
-    /* track member location */
-    let watch = this.geolocation.watchPosition();
-    watch.subscribe((data) => {
-      // this.points = []
-      // this.getGroupLocations2()
-      // this.setUpdateMapMemberLocation(data.coords.latitude, data.coords.longitude)
     });
   }
 
@@ -66,9 +57,9 @@ export class AddInfoPage {
     this.mapData.LatestLat = lat
     this.mapData.LatestLng = lng
     this.mapData.Id = JSON.parse(localStorage.getItem('userInfo')).ID
-    console.log('mapData : ', this.mapData);
+    console.log('Trying to Update My Db Location With : ', this.mapData);
     this.apiServ.updateMemberLocation(this.mapData).subscribe(data => {
-      console.log("data map firt page: ", data);
+      console.log("Db Location Updated: ", data);
     })
 
   }
