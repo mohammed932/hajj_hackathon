@@ -12,11 +12,11 @@
 
   <ion-row *ngFor="let msg of messageContainer; let even = even; let odd = odd">
     <ion-col col-6>
-      <div *ngIf="even" class="r-msg big-size">{{msg}}</div>
+      <div *ngIf="msg.direction == 'right'" class="r-msg big-size">{{msg.messageTxt}}</div>
     </ion-col>
 
     <ion-col col-6>
-      <div *ngIf="odd" class="l-msg big-size">{{msg}}</div>
+      <div *ngIf="msg.direction == 'left'" class="l-msg big-size">{{msg.messageTxt}}</div>
     </ion-col>
   </ion-row>
 </ion-content>

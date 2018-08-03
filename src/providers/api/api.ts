@@ -22,12 +22,34 @@ export class ApiProvider {
   }
 
   myGroup(params): Observable<any> {
-    let url = `https://prod-03.westeurope.logic.azure.com:443/workflows/8a558de11dfe4cd78c24309ff90290f1/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=SSku8FN_IzSBInsT_MJj0UIUP5pHWb0yAhLhPVjYs_o`
+    let url = `${this.settingService.URL}GroupsApis/GetGroupPeopleByGroupId`
     return this.http.post(url, JSON.stringify(params));
   }
 
   updateMemberLocation(params): Observable<any> {
-    let url = `https://prod-47.westeurope.logic.azure.com:443/workflows/a158053b3bd6456dadbcab4cb68e9e3a/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=STsAfPZ2fxw6XYr_am6vydx0ASjKa7YRdoHs04yKjOU`
+    let url = `${this.settingService.URL}PilgrimsApis/UpdatePilgrimByID`
     return this.http.post(url, JSON.stringify(params)); 
   }
+
+  addGroup(params): Observable<any> {
+    let url = `${this.settingService.URL}GroupsApis/CreateGroup`
+    return this.http.post(url, JSON.stringify(params)); 
+  }
+
+  updatePligirmGroup(params): Observable<any> {
+    let url = `${this.settingService.URL}PilgrimsApis/UpdatePilgrimGroup`
+    return this.http.post(url, JSON.stringify(params)); 
+  }
+
+  getMemberMessages(params): Observable<any> {
+    let url = `${this.settingService.URL}GroupMessages/GetGroupMessages`
+    return this.http.post(url, JSON.stringify(params)); 
+  }
+
+  createMessage(params): Observable<any> {
+    let url = `${this.settingService.URL}GroupMessages/CreateMessage`
+    return this.http.post(url, JSON.stringify(params)); 
+  }
+
+
 }

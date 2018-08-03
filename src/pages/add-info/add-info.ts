@@ -1,7 +1,7 @@
 import { ApiProvider } from './../../providers/api/api';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
 @IonicPage()
 @Component({
   selector: 'page-add-info',
@@ -9,24 +9,67 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddInfoPage {
   passport: any
+  mapData: any = {}
   waiting: boolean = false
   constructor(public navCtrl: NavController,
     private apiServ: ApiProvider,
+    private platform: Platform,
+    private geolocation: Geolocation,
     public navParams: NavParams) {
+      this.checkPassportExistence()
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddInfoPage');
-  }
 
   next() {
     this.waiting = true
     this.apiServ.getMemberInfo({ PilgrimsID: this.passport }).subscribe(data => {
+      localStorage.setItem('passport', this.passport)
       localStorage.setItem('userInfo', JSON.stringify(data))
+      localStorage.setItem('groupId', JSON.stringify(data.Group_ID))
       this.waiting = false
-      this.navCtrl.setRoot('TabsPage')
+      this.platform.ready().then(() => {
+        this.getCurrentMemberLocation()
+        this.navCtrl.setRoot('TabsPage')
+      })
+
     })
 
   }
 
+
+  getCurrentMemberLocation() {
+    /* get current member location  */
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log('current memner location : ', resp)
+      this.setUpdateMapMemberLocation(resp.coords.latitude, resp.coords.longitude)
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+    /* track member location */
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe((data) => {
+      // this.points = []
+      // this.getGroupLocations2()
+      // this.setUpdateMapMemberLocation(data.coords.latitude, data.coords.longitude)
+    });
+  }
+
+  checkPassportExistence() {
+    if (localStorage.getItem('passport')) {
+      this.passport = localStorage.getItem('passport')
+    }
+  }
+
+
+  setUpdateMapMemberLocation(lat, lng) {
+    this.mapData.LatestLat = lat
+    this.mapData.LatestLng = lng
+    this.mapData.Id = JSON.parse(localStorage.getItem('userInfo')).ID
+    console.log('mapData : ', this.mapData);
+    this.apiServ.updateMemberLocation(this.mapData).subscribe(data => {
+      console.log("data map firt page: ", data);
+    })
+
+  }
 }

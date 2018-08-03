@@ -21,9 +21,16 @@
     <ion-item>
       النوع : {{ getGender(userInfo.Gender)}}
     </ion-item>
+
+    <ion-item>
+      <ion-label>اختار اللغة</ion-label>
+      <ion-select [(ngModel)]="lang" okText="موافق" cancelText="اغلاق" (ionChange)="setLang()">
+        <ion-option [value]="lang.Code" *ngFor="let lang of Languages">{{lang.Language}}</ion-option>
+      </ion-select>
+    </ion-item>
+
   </ion-list>
 
-  
+
 
 </ion-content>
-

@@ -1,0 +1,29 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>اضافة مجموعة</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">ادخل اسم المجموعة</ion-label>
+      <ion-input [(ngModel)]="groupName" type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+
+
+
+  <button ion-button block full (click)="add()">
+    <span *ngIf="!waiting" class="enter">اضافة</span>
+    <ion-spinner name="ios-small" *ngIf="waiting" color="light"></ion-spinner>
+  </button>
+
+  <button ion-button block full (click)="scanCode()">
+    <span *ngIf="!waitingScan" class="enter"> افحص كود الدخول</span>
+    <ion-spinner name="ios-small" *ngIf="waitingScan" color="light"></ion-spinner>
+  </button>
+</ion-content>

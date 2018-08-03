@@ -13,7 +13,7 @@ export class MyApp {
     platform.ready().then(() => {
       this.platform.setDir('rtl', true)
       statusBar.styleDefault()
-      this.splashScreen.hide()
+      setTimeout(() => this.splashScreen.hide(), 300)
     })
   }
 }

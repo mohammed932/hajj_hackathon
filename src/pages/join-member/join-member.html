@@ -13,10 +13,15 @@
 
 
 <ion-content padding>
+  
   <loading-spinner *ngIf="loadingSpinner"></loading-spinner>
+
+  <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+
   <ion-list *ngIf="!loadingSpinner">
-    <ion-item *ngFor="let member of Members">{{member.P_Name}}</ion-item>
+    <ion-item *ngFor="let member of Members">{{member.pName}}</ion-item>
   </ion-list>
 
   <button ion-button block full (click)="next()">متابعة</button>
+
 </ion-content>

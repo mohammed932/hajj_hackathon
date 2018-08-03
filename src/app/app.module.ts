@@ -10,6 +10,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { SettingProvider } from '../providers/setting/setting';
 import { ApiProvider } from '../providers/api/api';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { ApiProvider } from '../providers/api/api';
     BrowserModule,
     IonicStorageModule.forRoot(),
     HttpClientModule,
+    NgxQRCodeModule,
     IonicModule.forRoot(MyApp, {
       mode: 'ios'
     })
@@ -38,7 +42,8 @@ import { ApiProvider } from '../providers/api/api';
       multi: true
     },
     SettingProvider,
-    ApiProvider
+    ApiProvider,
+    BarcodeScanner
   ]
 })
 export class AppModule { }
